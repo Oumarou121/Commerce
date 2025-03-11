@@ -1,0 +1,10 @@
+.order-feature {
+  background-color: #f4f4f4;
+  margin-bottom: 80px;
+}
+
+.order-feature .custom-container {
+  padding: 50px 0;
+  font-size: 1rem;
+  font-weight: 500;
+}

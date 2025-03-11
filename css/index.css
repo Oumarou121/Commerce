@@ -1,0 +1,501 @@
+/* ========================Hero Section==================== */
+.bg-img {
+  background-position: center center;
+  background-size: cover;
+}
+
+.single-hero-slider {
+  background-color: #aaa;
+  position: relative;
+}
+
+.hero-slider-content {
+  position: absolute;
+  left: 10%;
+  top: 25%;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 50%;
+  justify-content: space-between;
+}
+
+.hero-slider-content p {
+  width: 100%;
+  line-height: 30px;
+  margin: 5px 0 15px;
+}
+
+.btn-style-1 {
+  width: max-content;
+  display: inline-block;
+  font-weight: bold;
+  border-radius: 50px;
+  padding: 14px 20px 16px;
+  text-align: center;
+}
+
+.single-hero-slider {
+  height: 520px !important;
+}
+
+@media (max-width: 576px) {
+  .hero-slider-content {
+    top: 10%;
+    width: 80%;
+    height: 70%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .single-hero-slider {
+    height: 320px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .single-hero-slider {
+    height: 620px !important;
+  }
+
+  .hero-slider-content {
+    width: 30%;
+    height: 40%;
+  }
+}
+
+.animate-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+.animate-text.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.slick-dots {
+  position: absolute !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  justify-content: center;
+  gap: 10px !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.slick-dots li {
+  width: 28px !important;
+  height: 8px !important;
+  background-color: #ddd !important;
+  border-radius: 4px !important;
+  transition: all 0.3s ease !important;
+}
+
+.slick-dots li:hover {
+  background-color: var(--red) !important;
+}
+
+.slick-dots li button {
+  display: none !important;
+}
+
+.slick-dots li.slick-active {
+  background-color: var(--red) !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+}
+/* ========================Hero Section==================== */
+
+/* =================Trending Categories==================== */
+
+.categories-area {
+  padding-bottom: 35px;
+}
+
+.section-title {
+  margin-bottom: 40px;
+}
+
+.categories-wrap {
+  background: #fff;
+  padding: 25px 30px 30px;
+  margin: 0 0.5rem;
+  border: 1px solid #f8f8f8;
+}
+
+.categories-wrap .categories-content {
+  margin: 13px 0 0;
+  text-align: center;
+}
+
+.categories-img a {
+  transition: transform 1s ease;
+  display: block;
+  overflow: hidden;
+}
+
+.categories-img a:hover img {
+  transform: scale(1.1);
+}
+
+.categories-content a:hover {
+  color: var(--red);
+}
+
+/* =================Trending Categories==================== */
+
+/* ==================== Banner========================= */
+
+.banner-wrap {
+  position: relative;
+  margin: 0 15px;
+}
+
+.banner-wrap .banner-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-wrap .banner-content-1 span {
+  display: block;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.banner-wrap .banner-content-1 h2 {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 10px 0 12px;
+}
+
+.btn-style-1 a {
+  color: white;
+}
+
+.banner-wrap .banner-content-1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .banner-wrap {
+    margin: 30px;
+  }
+  .banner-wrap .banner-content-1 {
+    top: 30%;
+  }
+}
+
+@media (max-width: 576px) {
+  .banner-wrap {
+    margin: 15px 0;
+  }
+
+  .banner-area .custom-container .row {
+    flex-direction: column;
+  }
+}
+
+.btn-style-1:hover {
+  background-color: #333;
+}
+
+/* ==================== Banner ========================= */
+
+/* ================= Last Products ================== */
+.products-slider .slick-slide {
+  margin-bottom: 40px !important;
+  margin: 0 10px; /* Ajoute un espace horizontal entre les éléments */
+}
+
+/* ================= Last Products ================== */
+
+/* ================= Arrows ================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slider-wrapper {
+  position: relative;
+}
+
+.custom-prev,
+.custom-next,
+.custom-events-prev,
+.custom-events-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0.6rem;
+  border-radius: 50%;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.09);
+  font-size: 1.5rem;
+  color: #343434;
+  background-color: white;
+  transition: all 0.3s ease;
+  opacity: 0;
+  z-index: 999;
+}
+
+.custom-prev:hover,
+.custom-next:hover,
+.custom-eventsprev:hover,
+.custom-eventsnext:hover {
+  color: red;
+}
+
+.custom-prev,
+.custom-events-prev {
+  left: 0.5%;
+}
+
+.custom-next,
+.custom-events-next {
+  right: 0.5%;
+}
+
+.slider-wrapper:hover .custom-prev,
+.slider-wrapper:hover .custom-next,
+.slider-wrapper:hover .custom-events-prev,
+.slider-wrapper:hover .custom-events-next {
+  opacity: 1;
+}
+
+/* ================= Arrows ================== */
+
+/* ============ Special Product ============= */
+
+.special-product-area {
+  background: #fbfbfb
+    url("https://drou-electronics-store.myshopify.com/cdn/shop/files/main-banner-01.jpg?v=1674276678")
+    no-repeat center center / cover;
+  padding: 70px 0;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 992px) {
+  .special-product-area {
+    padding-top: 10rem;
+  }
+}
+
+.row {
+  justify-content: space-between;
+}
+
+.col-left,
+.col-right {
+  flex: 1;
+}
+
+.count_txt {
+  flex-direction: column;
+  align-items: center;
+}
+
+.count_txt h5 {
+  color: white;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: max-content;
+}
+
+.count_txt h4 {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.count_btn .shop-button {
+  color: #343434;
+  padding: 10px 20px;
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 20px;
+  font-weight: 800;
+}
+
+.count_btn .shop-button:hover {
+  color: var(--red);
+}
+
+.special-product__countdown {
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.single-countdown {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.single-countdown__time {
+  font-weight: bold;
+}
+
+@media (max-width: 576px) {
+  .special-product-area {
+    padding: 35px 0;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .col-left,
+  .col-right {
+    flex: none;
+    margin-bottom: 20px;
+  }
+}
+
+/* ============ Special Product ============= */
+
+/* ============ Popular Products ============= */
+
+.popularProducts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .popularProducts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .popularProducts {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============ Popular Products ============= */
+
+/* ============ Blogs & Events ============= */
+
+.blog-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.blog-wrap .blog-img {
+  position: relative;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 45%;
+  -ms-flex: 0 0 45%;
+  flex: 0 0 45%;
+  padding-right: 35px;
+}
+
+.blog-img {
+  position: relative;
+  overflow: hidden;
+}
+.blog-wrap .blog-img a {
+  border-radius: 0;
+}
+.blog-wrap .blog-img a {
+  display: block;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.blog-wrap .blog-content {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 55%;
+  -ms-flex: 0 0 55%;
+  flex: 0 0 55%;
+  margin: 15px 0 0;
+}
+
+.blog-content {
+  padding-top: 20px;
+}
+
+.blog-wrap:hover .article__featured-image {
+  transform: scale(1.05);
+}
+
+.blog-content a:hover {
+  color: var(--red) !important;
+}
+
+/* ============ Blogs & Events ============= */
+
+/* ============ rowBanner ============= */
+
+.feature-section {
+  width: 100%;
+  background-color: #f4f4f4af;
+}
+
+.feature-section .rowBanner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+  margin: 0 -15px;
+}
+
+.single-contact-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.colBanner {
+  width: max-content;
+}
+
+@media (max-width: 576px) {
+  .feature-section .rowBanner {
+    flex-direction: column;
+  }
+
+  .colBanner {
+    width: 75%;
+  }
+}
+
+@media (min-width: 992px) {
+  .colBanner {
+    width: 25%;
+  }
+}
+
+/* ============ rowBanner ============= */
+
+.footer-widget {
+  font-size: 14px;
+}

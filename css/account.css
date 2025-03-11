@@ -1,0 +1,90 @@
+.account-feature {
+  background-color: #f4f4f4;
+  margin-bottom: 80px;
+}
+
+.account-feature .custom-container {
+  padding: 50px 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #333;
+  font-family: "CerebriSans", sans-serif;
+  font-weight: 400;
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+h3.account-name {
+  font-size: 1.25rem;
+}
+
+.logout-link {
+  float: right;
+}
+
+.logout-link {
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+.logout-link:hover,
+#nbr-address:hover {
+  color: #e52e06;
+}
+
+.divider-small {
+  border-top: 1px solid #ddd;
+  margin: 15px 0;
+}
+
+.grid {
+  display: flex;
+  gap: 30px;
+}
+
+.grid-item {
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+.two-thirds {
+  width: 66.666%;
+}
+
+.one-third {
+  width: 33.333%;
+  margin-bottom: 40px;
+}
+
+.account-address {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.74;
+  font-family: "CerebriSans", sans-serif;
+}
+
+@media only screen and (max-width: 768px) {
+  .grid {
+    flex-direction: column;
+  }
+  .grid-item {
+    width: 100%;
+  }
+}
