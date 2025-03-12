@@ -84,6 +84,10 @@ class Order {
     this.createAt = createAt;
     this.updateAt = updateAt;
   }
+
+  getItems() {
+    return this.items;
+  }
 }
 
 class ordersManager {
@@ -93,6 +97,10 @@ class ordersManager {
 
   addOrder(order) {
     this.orders.push(order);
+  }
+
+  getOrders() {
+    return this.orders;
   }
 }
 
