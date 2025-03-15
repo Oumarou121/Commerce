@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Orders - Niger.net</title>
+    <title>Track Product - Niger.net</title>
     <link rel="stylesheet" href="css/base.css?v=1.0" />
-    <link rel="stylesheet" href="css/order.css" />
+    <link rel="stylesheet" href="css/track.css" />
 
     <!--============Icon Cdn==============-->
     <link
@@ -184,43 +184,16 @@
       </header>
 
       <main id="main">
-        <section class="order-feature mb-40">
+        <section class="track-feature mb-40">
           <div class="custom-container">
             <a href="index.html">Home</a> <span>/</span>
-            <span class="text-red">Orders</span>
+            <a href="order.html">Orders</a> <span>/</span>
+            <a id="title" href="index.html">Order #1</a> <span>/</span>
+            <span class="text-red">Track Product</span>
           </div>
         </section>
-
-        <section class="custom-container">
-          <nav>
-            <ul class="bar-nav">
-              <li>
-                <span class="active" data-tab="delivered" role="button"
-                  >En cours/Livrés</span
-                >
-              </li>
-              <li>
-                <span data-tab="canceled" role="button"
-                  >Annulées/Retournées</span
-                >
-              </li>
-              <li>
-                <span data-tab="reported" role="button">Reportée/Rejetée</span>
-              </li>
-            </ul>
-          </nav>
-
-          <section class="orders-content">
-            <div class="tab-content" id="delivered">
-              <ul class="cart-items"></ul>
-            </div>
-            <div class="tab-content" id="canceled">
-              <ul class="cart-items"></ul>
-            </div>
-            <div class="tab-content" id="reported">
-              <ul class="cart-items"></ul>
-            </div>
-          </section>
+        <section class="track-content">
+          <ul id="track-list"></ul>
         </section>
       </main>
 
@@ -362,6 +335,6 @@
     <div id="scrollUp"><i class="uil uil-arrow-up"></i></div>
 
     <script src="js/base.js"></script>
-    <script src="js/order.js"></script>
+    <script src="js/track.js"></script>
   </body>
 </html>

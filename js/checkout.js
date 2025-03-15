@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const addressContainer = document.getElementById("address-container");
   const firstName = document.getElementById("first-name");
   const lastName = document.getElementById("last-name");
+  document.getElementById("user-email").innerHTML = user.email;
   const phoneNumber1 = document.getElementById("phone-number1");
   const phoneNumber2 = document.getElementById("phone-number2");
   const regionSelect = document.getElementById("region-select");

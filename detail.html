@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Orders - Niger.net</title>
+    <title id="title1">Orders - Niger.net</title>
     <link rel="stylesheet" href="css/base.css?v=1.0" />
-    <link rel="stylesheet" href="css/order.css" />
+    <link rel="stylesheet" href="css/detail.css" />
 
     <!--============Icon Cdn==============-->
     <link
@@ -184,43 +184,69 @@
       </header>
 
       <main id="main">
-        <section class="order-feature mb-40">
+        <section class="detail-feature mb-40">
           <div class="custom-container">
             <a href="index.html">Home</a> <span>/</span>
-            <span class="text-red">Orders</span>
+            <a href="order.html">Orders</a> <span>/</span>
+            <span id="title2" class="text-red"></span>
           </div>
         </section>
 
-        <section class="custom-container">
-          <nav>
-            <ul class="bar-nav">
-              <li>
-                <span class="active" data-tab="delivered" role="button"
-                  >En cours/Livrés</span
-                >
-              </li>
-              <li>
-                <span data-tab="canceled" role="button"
-                  >Annulées/Retournées</span
-                >
-              </li>
-              <li>
-                <span data-tab="reported" role="button">Reportée/Rejetée</span>
-              </li>
-            </ul>
-          </nav>
+        <section class="primary-content custom-container1">
+          <div id="products-content" class="products-content">
+            <div class="order-title">
+              <i class="uil uil-box"></i>
+              <h2>Order Details</h2>
+            </div>
+          </div>
+          <div class="order-summary">
+            <h2>Order Details</h2>
+            <table class="cart-summary-table">
+              <tbody>
+                <tr class="cart-subtotal">
+                  <th>Subtotal</th>
+                  <td id="sub-total"></td>
+                </tr>
+                <tr class="cart-shipping">
+                  <th>Shipping Fee</th>
+                  <td id="shipping-total"></td>
+                </tr>
+                <tr class="order-total">
+                  <th>Total Paid</th>
+                  <td id="total"></td>
+                </tr>
+              </tbody>
+            </table>
 
-          <section class="orders-content">
-            <div class="tab-content" id="delivered">
-              <ul class="cart-items"></ul>
+            <h2>Payment Status</h2>
+          </div>
+          <div class="user-content">
+            <h2>Customer</h2>
+            <div class="user-name-content">
+              <i class="uil uil-user-circle"></i>
+              <p id="user-name"></p>
+              <a href="account.html" class="uil uil-arrow-right"></a>
             </div>
-            <div class="tab-content" id="canceled">
-              <ul class="cart-items"></ul>
+            <hr />
+            <div class="user-products">
+              <i class="uil uil-archive"></i>
+              <p id="nbr-articles"></p>
             </div>
-            <div class="tab-content" id="reported">
-              <ul class="cart-items"></ul>
+            <hr />
+            <div class="user-contact-info">
+              <h2>Contact info</h2>
+              <div class="">
+                <i class="uil uil-envelope"></i>
+                <p id="user-email"></p>
+              </div>
+              <div class="">
+                <i class="uil uil-phone-alt"></i>
+                <p id="user-phone-number"></p>
+              </div>
             </div>
-          </section>
+            <hr />
+            <div id="user-address" class="user-shipping-adress"></div>
+          </div>
         </section>
       </main>
 
@@ -362,6 +388,6 @@
     <div id="scrollUp"><i class="uil uil-arrow-up"></i></div>
 
     <script src="js/base.js"></script>
-    <script src="js/order.js"></script>
+    <script src="js/detail.js"></script>
   </body>
 </html>

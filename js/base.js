@@ -2,8 +2,9 @@ var filteredProducts = [];
 var compareProducts = [];
 
 class User {
-  constructor(id, addresses = [], currentIndex) {
+  constructor(id, email, addresses = [], currentIndex) {
     this.id = id;
+    this.email = email;
     this.addresses = addresses;
     this.currentIndex = currentIndex;
   }
@@ -34,9 +35,10 @@ class Address {
 }
 
 class orderItemHistory {
-  constructor(status, updateAt) {
+  constructor(status, updateAt, endingAt = null) {
     this.status = status;
     this.updateAt = updateAt;
+    this.endingAt = endingAt;
   }
 }
 
@@ -91,12 +93,16 @@ class Order {
 }
 
 class ordersManager {
-  constructor(orders) {
+  constructor(orders = []) {
     this.orders = orders;
   }
 
   addOrder(order) {
     this.orders.push(order);
+  }
+
+  getOrderById(id) {
+    return this.orders.filter((o) => o.id === id);
   }
 
   getOrders() {
@@ -106,7 +112,7 @@ class ordersManager {
 
 var user = new User(
   0,
-
+  "oumaroumamodou123@gmail.com",
   [
     // new Address("Oumarou", "Mamoudou", "", "", "", "", ""),
 
@@ -301,6 +307,26 @@ class Blog {
 
 function getUniqueTags(blogs) {
   return [...new Set(blogs.map((blog) => blog.tag.trim().toLowerCase()))];
+}
+
+function formatDate(timestamp) {
+  const date = new Date(timestamp);
+
+  const optionsDate = { day: "numeric", month: "long", year: "numeric" };
+  const optionsTime = { hour: "2-digit", minute: "2-digit" };
+
+  const formattedDate = date.toLocaleDateString("fr-FR", optionsDate);
+  const formattedTime = date.toLocaleTimeString("fr-FR", optionsTime);
+
+  return `${formattedDate} à ${formattedTime}`;
+}
+
+function formatDateOrder(date1, date2 = null) {
+  if (date2 === null) {
+    return `Le ${formatDate(date1)}`;
+  } else {
+    return `Entre Le ${formatDate(date1)} et le ${formatDate(date2)}`;
+  }
 }
 
 const products = [
@@ -919,11 +945,11 @@ const blogs = [
 
 var orders = new ordersManager([
   new Order(
-    1,
+    0,
     0,
     [
       new orderItem(
-        101,
+        0,
         "Uphone lightning cable",
         "//drou-electronics-store.myshopify.com/cdn/shop/products/p4_c46c6d30-4b9f-4971-96be-d28d9f0d5ee5_large.jpg?v=1674275311",
         10000,
@@ -932,14 +958,18 @@ var orders = new ordersManager([
         [
           new orderItemHistory("pending", Date.now() - 2 * 24 * 60 * 60 * 1000),
           new orderItemHistory(
-            "processed",
+            "progress",
             Date.now() - 1 * 24 * 60 * 60 * 1000
           ),
-          new orderItemHistory("shipped", Date.now()),
+          new orderItemHistory(
+            "report-returned",
+            Date.now() - 2 * 24 * 60 * 60 * 1000,
+            Date.now()
+          ),
         ]
       ),
       new orderItem(
-        101,
+        1,
         "iPhone 14 pro max",
         "https://drou-electronics-store.myshopify.com/cdn/shop/products/p7_36d931d4-1ef2-4c82-9a65-80426fb77f21_1024x1024.jpg?v=1674275335",
         200000,
@@ -948,14 +978,13 @@ var orders = new ordersManager([
         [
           new orderItemHistory("pending", Date.now() - 2 * 24 * 60 * 60 * 1000),
           new orderItemHistory(
-            "processed",
+            "cancelled",
             Date.now() - 1 * 24 * 60 * 60 * 1000
           ),
-          new orderItemHistory("shipped", Date.now()),
         ]
       ),
       new orderItem(
-        102,
+        2,
         "Smartphone Tecno Spark Go 2024",
         "https://www.tunisianet.com.tn/382924-large/smartphone-tecno-spark-go-2024-2-go-64-go-blanc.jpg",
         65000,
@@ -966,6 +995,63 @@ var orders = new ordersManager([
     ],
     user.addresses[0],
     "cash",
+    1800000,
+    1000,
+    "shipped",
+    Date.now() - 3 * 24 * 60 * 60 * 1000,
+    Date.now()
+  ),
+  new Order(
+    1,
+    0,
+    [
+      new orderItem(
+        3,
+        "Uphone lightning cable",
+        "//drou-electronics-store.myshopify.com/cdn/shop/products/p4_c46c6d30-4b9f-4971-96be-d28d9f0d5ee5_large.jpg?v=1674275311",
+        10000,
+        0,
+        1,
+        [
+          new orderItemHistory("pending", Date.now() - 2 * 24 * 60 * 60 * 1000),
+          new orderItemHistory(
+            "progress",
+            Date.now() - 1 * 24 * 60 * 60 * 1000
+          ),
+          new orderItemHistory(
+            "report-returned",
+            Date.now() - 1 * 24 * 60 * 60 * 1000,
+            Date.now()
+          ),
+        ]
+      ),
+      new orderItem(
+        4,
+        "iPhone 14 pro max",
+        "https://drou-electronics-store.myshopify.com/cdn/shop/products/p7_36d931d4-1ef2-4c82-9a65-80426fb77f21_1024x1024.jpg?v=1674275335",
+        200000,
+        0,
+        1,
+        [
+          new orderItemHistory("pending", Date.now() - 2 * 24 * 60 * 60 * 1000),
+          new orderItemHistory(
+            "cancelled",
+            Date.now() - 1 * 24 * 60 * 60 * 1000
+          ),
+        ]
+      ),
+      new orderItem(
+        5,
+        "Smartphone Tecno Spark Go 2024",
+        "https://www.tunisianet.com.tn/382924-large/smartphone-tecno-spark-go-2024-2-go-64-go-blanc.jpg",
+        65000,
+        5000,
+        2,
+        [new orderItemHistory("pending", Date.now())]
+      ),
+    ],
+    user.addresses[0],
+    "virtual-wallet-10248732",
     1800000,
     1000,
     "shipped",
