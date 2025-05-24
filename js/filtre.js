@@ -56,7 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
     const categoryPath = params.get("category") || "";
     updateBreadcrumb(categoryPath);
-    applyFilter(null, categoryPath, true);
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get("query");
+    if (searchQuery) {
+      document.querySelector(".searchInput").value = searchQuery;
+      applyFilter(null, categoryPath, true, true, searchQuery);
+    } else {
+      applyFilter(null, categoryPath, true);
+    }
     const categoryPath1 = getCurrentCategoryPath();
     const currentCategory = findCategory(
       filtres.generateFilters(),

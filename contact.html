@@ -42,7 +42,7 @@
     <div id="searchBar">
       <div class="exit">
         <svg
-          id="hiddenSearch"
+          id="closeSearch"
           xmlns="http://www.w3.org/2000/svg"
           height="32"
           viewBox="0 -960 960 960"
@@ -54,7 +54,20 @@
           />
         </svg>
       </div>
-      <input class="searchInput" type="text" placeholder="Search our store" />
+
+      <div class="search-results">
+        <input class="searchInput" type="text" placeholder="Search our store" />
+        <div class="result-content">
+          <h3>Products</h3>
+          <ul class="results-list">
+            <li class="result-item search-option">
+              <button>
+                <i class="uil uil-arrow-right"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="wrapper">
@@ -405,7 +418,10 @@
     </div>
 
     <!-- ============== Scroll Up ==================== -->
-    <div id="scrollUp"><i class="uil uil-arrow-up"></i></div>
+    <div class="button-content">
+      <div id="chat" class="show"><i class="uil uil-comment-message"></i></div>
+      <div id="scrollUp"><i class="uil uil-arrow-up"></i></div>
+    </div>
 
     <script>
       function initMap() {

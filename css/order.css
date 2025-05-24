@@ -52,14 +52,14 @@
   left: 50%;
   width: 0;
   height: 3px;
-  background-color: red;
+  background-color: #e52e06;
   transform: translateX(-50%);
   transition: width 0.3s ease-in-out;
 }
 
 .bar-nav li span.active {
   font-weight: bold;
-  color: red;
+  color: e52e06;
   background-color: #ffecec;
   border-radius: 5px 5px 0 0;
   padding: 10px 20px;
@@ -71,7 +71,7 @@
 }
 
 .bar-nav li span:hover {
-  color: red;
+  color: e52e06;
   cursor: pointer;
 }
 
@@ -157,7 +157,7 @@
 }
 
 .bg-red {
-  background: #f44336;
+  background: #e52e06;
   color: #fff;
 }
 
@@ -246,56 +246,4 @@
 
 .orders-content {
   margin-top: 30px;
-}
-
-.txt-yellow {
-  color: #f1c40f;
-}
-
-.txt-light-blue {
-  color: #3498db;
-}
-
-.txt-blue {
-  color: #004466;
-}
-
-.txt-green {
-  color: #2ecc71;
-}
-
-.txt-purple {
-  color: #9b59b6;
-}
-
-.txt-red {
-  color: #e74c3c;
-}
-
-.txt-orange {
-  color: #e67e22;
-}
-
-.txt-dark-red {
-  color: #c0392b;
-}
-
-.txt-gray {
-  color: #95a5a6;
-}
-
-.txt-dark-green {
-  color: #27ae60;
-}
-
-.txt-light-gray {
-  color: #ecf0f1;
-}
-
-.txt-default {
-  color: #bdc3c7;
-}
-
-.txt-brown {
-  color: #8b4513;
 }

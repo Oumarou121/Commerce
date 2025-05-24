@@ -45,7 +45,9 @@ h3.account-name {
 }
 
 .logout-link:hover,
-#nbr-address:hover {
+#nbr-address:hover,
+#nbr-orders a:hover,
+#messages-link:hover {
   color: #e52e06;
 }
 
@@ -87,4 +89,36 @@ h3.account-name {
   .grid-item {
     width: 100%;
   }
+}
+
+.order-card {
+  max-width: 350px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  font-size: 0.9rem;
+}
+
+.order-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.order-card p {
+  margin: 5px 0;
+}
+
+.order-card .order-details {
+  display: inline-block;
+  margin-top: 10px;
+  color: #e52e06;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.order-card .order-details:hover {
+  text-decoration: underline;
 }

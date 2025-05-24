@@ -39,6 +39,38 @@
       </div>
     </div>
 
+    <!-- ===========Search============= -->
+    <div id="searchBar">
+      <div class="exit">
+        <svg
+          id="closeSearch"
+          xmlns="http://www.w3.org/2000/svg"
+          height="32"
+          viewBox="0 -960 960 960"
+          width="32"
+        >
+          <path
+            fill="black"
+            d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+          />
+        </svg>
+      </div>
+
+      <div class="search-results">
+        <input class="searchInput" type="text" placeholder="Search our store" />
+        <div class="result-content">
+          <h3>Products</h3>
+          <ul class="results-list">
+            <li class="result-item search-option">
+              <button>
+                <i class="uil uil-arrow-right"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <div class="wrapper">
       <header id="header" class="myheader">
         <div
@@ -99,7 +131,7 @@
         <div id="fond" class="fond">
           <nav id="links-container" class="links-container">
             <ul class="flex">
-              <li class="linksTitle" role="list">
+              <!-- <li class="linksTitle" role="list">
                 PAGES
                 <svg
                   id="hiddenLink"
@@ -113,39 +145,34 @@
                     d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
                   />
                 </svg>
-              </li>
+              </li> -->
+              <div id="hiddenLink" class="category-title">
+                <h2>PAGES</h2>
+                <i class="uil uil-times"></i>
+              </div>
               <li><a href="index.html">Home</a></li>
               <li>
                 <div id="showCategory" href="#">SHOP</div>
               </li>
 
               <li><a href="blogs.html">BLOG</a></li>
-              <!-- <li><a href="#">ABOUT US</a></li> -->
               <li><a href="contact.html">CONTACTS US</a></li>
+              <li><a href="contact.html">PROFILE</a></li>
+              <li><a href="#">Log In</a> <span>/</span> <a href="#">Sign Up</a></li>
 
-              <li class="login">
+
+              <!-- <li class="login">
                 <a href="#">Log In</a> <span>/</span> <a href="#">Sign Up</a>
-              </li>
+              </li> -->
             </ul>
           </nav>
         </div>
 
         <div id="fondCategory" class="fond">
           <div id="category" class="category-section">
-            <div class="category-title">
-              <h2><a href="shop.html">Categories</a></h2>
-              <svg
-                id="hiddenCategory"
-                xmlns="http://www.w3.org/2000/svg"
-                height="24"
-                viewBox="0 -960 960 960"
-                width="24"
-              >
-                <path
-                  fill="bla"
-                  d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
-                />
-              </svg>
+            <div id="hiddenCategory" class="category-title">
+              <h2>CATEGORIES</h2>
+              <i class="uil uil-times"></i>
             </div>
             <ul id="category-list"></ul>
           </div>
@@ -231,9 +258,7 @@
             </div>
           </div>
           <div class="otherConfirm">
-            <button id="switchCategory" type="button">
-              Changer de Categorie
-            </button>
+            <button id="switchCategory" type="button">Apply Filters</button>
           </div>
         </div>
       </header>
@@ -327,7 +352,7 @@
             </div>
 
             <div class="shop-right">
-              <div class="grid-list-top mb-30">
+              <div class="grid-list-top">
                 <input type="checkbox" id="sidebar-active" hidden />
                 <label
                   id="show-filtre"
@@ -374,6 +399,11 @@
                     </select>
                   </div>
                 </div>
+              </div>
+
+              <div id="show-categories" class="categories-btn mb-30">
+                <span class="cat-title">Categories</span>
+                <i class="fa fa-reorder"></i>
               </div>
 
               <div id="listProducts" class="listProducts grid"></div>
@@ -525,7 +555,10 @@
     </div>
 
     <!-- ============== Scroll Up ==================== -->
-    <div id="scrollUp"><i class="uil uil-arrow-up"></i></div>
+    <div class="button-content">
+      <div id="chat" class="show"><i class="uil uil-comment-message"></i></div>
+      <div id="scrollUp"><i class="uil uil-arrow-up"></i></div>
+    </div>
 
     <script src="js/base.js"></script>
     <script src="js/shop.js"></script>

@@ -34,11 +34,27 @@ class Address {
   }
 }
 
+class Justification {
+  constructor(quantity, justification, justificationImage = null) {
+    this.quantity = quantity;
+    this.justification = justification;
+    this.justificationImage = justificationImage;
+  }
+}
+
 class orderItemHistory {
-  constructor(status, updateAt, endingAt = null) {
+  constructor(
+    status,
+    updateAt,
+    endingAt = null,
+    guarantee = null,
+    justification = null
+  ) {
     this.status = status;
     this.updateAt = updateAt;
     this.endingAt = endingAt;
+    this.guarantee = guarantee;
+    this.justification = justification;
   }
 }
 
@@ -66,6 +82,7 @@ class Order {
   constructor(
     id,
     userId,
+    userEmail,
     items = [],
     shippingAddress = null,
     payment,
@@ -77,6 +94,7 @@ class Order {
   ) {
     this.id = id;
     this.userId = userId;
+    this.userEmail = userEmail;
     this.items = items;
     this.shippingAddress = shippingAddress;
     this.payment = payment;
@@ -155,6 +173,7 @@ class Product {
     name,
     category,
     price,
+    reductionType = "no-percentage",
     priceReduction,
     images,
     specs,
@@ -166,12 +185,21 @@ class Product {
     this.name = name;
     this.category = category;
     this.price = price;
+    this.reductionType = reductionType; // "no-percentage" or "percentage",
     this.priceReduction = priceReduction;
     this.images = images;
     this.specs = specs;
     this.reviews = reviews;
     this.reference = this.generateReference();
     this.description = this.generateDescription();
+  }
+
+  getPrice() {
+    if (this.reductionType === "no-percentage") {
+      return formatPrice(this.price - this.priceReduction);
+    } else {
+      return formatPrice(this.price - (this.price * this.priceReduction) / 100);
+    }
   }
 
   generateReference() {
@@ -329,6 +357,52 @@ function formatDateOrder(date1, date2 = null) {
   }
 }
 
+class Message {
+  constructor(id, sender, receiver, message, time, isRead) {
+    this.id = id;
+    this.sender = sender;
+    this.receiver = receiver;
+    this.message = message;
+    this.time = time;
+    this.isRead = isRead;
+  }
+}
+
+const messages = [
+  new Message(
+    0,
+    "Administrateur",
+    "all",
+    "Bienvenue sur notre boutique en ligne ! 🎉 Nous sommes ravis de vous accueillir. N'hésitez pas à parcourir nos produits et à nous contacter si vous avez des questions. Bonne navigation !",
+    Date.now(),
+    false
+  ),
+  new Message(
+    1,
+    "Support",
+    "all",
+    "Votre commande est en cours de traitement.",
+    Date.now(),
+    false
+  ),
+  new Message(
+    2,
+    "Livraison",
+    "all",
+    "Votre colis arrivera demain.",
+    Date.now(),
+    false
+  ),
+  new Message(
+    3,
+    "Administrateur",
+    "all",
+    "Bienvenue sur notre boutique en ligne ! 🎉 Nous sommes ravis de vous accueillir. N'hésitez pas à parcourir nos produits et à nous contacter si vous avez des questions. Bonne navigation !",
+    Date.now(),
+    true
+  ),
+];
+
 const products = [
   new Product(
     0,
@@ -337,6 +411,7 @@ const products = [
     "Uphone lightning cable",
     "Téléphonie & Tablette/Accessoirs/Chargeurs & cablés",
     10000,
+    "no-percentage",
     0,
     [
       "//drou-electronics-store.myshopify.com/cdn/shop/products/p4_c46c6d30-4b9f-4971-96be-d28d9f0d5ee5_large.jpg?v=1674275311",
@@ -356,7 +431,7 @@ const products = [
       "Ecran Tactile": "Non",
       Réseau: "WiFi - Bluetooth",
       Caméra: "Webcam avec micro",
-      Garantie: "1 An",
+      Guarantee: "1 An",
       Couleur: "Noir",
       Availability: "Available In stock",
       Access: "oui",
@@ -392,7 +467,8 @@ const products = [
     "Smartphone Tecno Spark Go 2024",
     "Téléphonie & Tablette/Smartphone",
     65000,
-    5000,
+    "percentage",
+    10,
     [
       "https://www.tunisianet.com.tn/382924-large/smartphone-tecno-spark-go-2024-2-go-64-go-blanc.jpg",
       "https://www.tunisianet.com.tn/382924-large/smartphone-tecno-spark-go-2024-2-go-64-go-blanc.jpg",
@@ -414,7 +490,7 @@ const products = [
       "Charge rapide": "15 W Type C",
       Audio: "Deux haut-parleurs (Son DTS)",
       Couleur: "Vert",
-      Garantie: "1 an",
+      Guarantee: "1 an",
     },
     [
       {
@@ -447,6 +523,7 @@ const products = [
     "iPhone 14 pro max",
     "Téléphonie & Tablette/Smartphone",
     250000,
+    "no-percentage",
     45000,
 
     [
@@ -469,7 +546,7 @@ const products = [
       Réseau: "Gigabit Ethernet - Wi-Fi 6E - Bluetooth 5.3",
       Système: "FreeDos",
       Couleur: "Noir translucide",
-      Garantie: "1 an",
+      Guarantee: "1 an",
     },
     [
       {
@@ -496,12 +573,13 @@ const products = [
     ]
   ),
   new Product(
-    0,
+    3,
     100,
     10,
     "Uphone lightning cable",
     "Téléphonie & Tablette/Accessoirs/Chargeurs & cablés",
     10000,
+    "no-percentage",
     0,
     [
       "//drou-electronics-store.myshopify.com/cdn/shop/products/p4_c46c6d30-4b9f-4971-96be-d28d9f0d5ee5_large.jpg?v=1674275311",
@@ -521,7 +599,7 @@ const products = [
       "Ecran Tactile": "Non",
       Réseau: "WiFi - Bluetooth",
       Caméra: "Webcam avec micro",
-      Garantie: "1 An",
+      Guarantee: "1 An",
       Couleur: "Noir",
       Availability: "Available In stock",
       Access: "oui",
@@ -551,12 +629,13 @@ const products = [
     ]
   ),
   new Product(
-    1,
+    4,
     10,
     15,
     "Smartphone Tecno Spark Go 2024",
     "Téléphonie & Tablette/Smartphone",
     65000,
+    "no-percentage",
     5000,
     [
       "https://www.tunisianet.com.tn/382924-large/smartphone-tecno-spark-go-2024-2-go-64-go-blanc.jpg",
@@ -579,7 +658,7 @@ const products = [
       "Charge rapide": "15 W Type C",
       Audio: "Deux haut-parleurs (Son DTS)",
       Couleur: "Vert",
-      Garantie: "1 an",
+      Guarantee: "1 an",
     },
     [
       {
@@ -606,13 +685,14 @@ const products = [
     ]
   ),
   new Product(
-    2,
+    5,
     5,
     20,
     "iPhone 14 pro max",
     "Téléphonie & Tablette/Smartphone",
     250000,
-    45000,
+    "percentage",
+    5,
 
     [
       "https://drou-electronics-store.myshopify.com/cdn/shop/products/p7_36d931d4-1ef2-4c82-9a65-80426fb77f21_1024x1024.jpg?v=1674275335",
@@ -634,7 +714,7 @@ const products = [
       Réseau: "Gigabit Ethernet - Wi-Fi 6E - Bluetooth 5.3",
       Système: "FreeDos",
       Couleur: "Noir translucide",
-      Garantie: "1 an",
+      Guarantee: "1 an",
     },
     [
       {
@@ -947,6 +1027,7 @@ var orders = new ordersManager([
   new Order(
     0,
     0,
+    "oumaroumamodou123@gmail.com",
     [
       new orderItem(
         0,
@@ -962,7 +1043,7 @@ var orders = new ordersManager([
             Date.now() - 1 * 24 * 60 * 60 * 1000
           ),
           new orderItemHistory(
-            "report-returned",
+            "report-delivered",
             Date.now() - 2 * 24 * 60 * 60 * 1000,
             Date.now()
           ),
@@ -978,7 +1059,7 @@ var orders = new ordersManager([
         [
           new orderItemHistory("pending", Date.now() - 2 * 24 * 60 * 60 * 1000),
           new orderItemHistory(
-            "cancelled",
+            "progressed-returned",
             Date.now() - 1 * 24 * 60 * 60 * 1000
           ),
         ]
@@ -990,20 +1071,37 @@ var orders = new ordersManager([
         65000,
         5000,
         2,
-        [new orderItemHistory("pending", Date.now())]
+        [
+          new orderItemHistory("pending", Date.now() - 1 * 24 * 60 * 60 * 1000),
+          new orderItemHistory(
+            "shipping",
+            Date.now() - 2 * 24 * 60 * 60 * 1000
+          ),
+          new orderItemHistory(
+            "progress",
+            Date.now() - 1 * 24 * 60 * 60 * 1000,
+            Date.now()
+          ),
+          new orderItemHistory(
+            "delivered",
+            Date.now(),
+            Date.now() + 3 * 24 * 60 * 60 * 1000
+          ),
+        ]
       ),
     ],
     user.addresses[0],
     "cash",
     1800000,
     1000,
-    "shipped",
+    "shipping",
     Date.now() - 3 * 24 * 60 * 60 * 1000,
     Date.now()
   ),
   new Order(
     1,
     0,
+    "asma@gmail.com",
     [
       new orderItem(
         3,
@@ -1054,7 +1152,7 @@ var orders = new ordersManager([
     "virtual-wallet-10248732",
     1800000,
     1000,
-    "shipped",
+    "shipping",
     Date.now() - 3 * 24 * 60 * 60 * 1000,
     Date.now()
   ),
@@ -1077,8 +1175,9 @@ class Filtres {
 }
 
 class Category {
-  constructor(name) {
+  constructor(name, iClass = "") {
     this.name = name;
+    this.iClass = iClass;
     this.subCategories = [];
     this.options = [];
   }
@@ -1117,7 +1216,7 @@ class Option {
 
 class SubCategory extends Category {}
 
-const informatique = new Category("Informatique");
+const informatique = new Category("Informatique", "uil-desktop");
 
 const ordinateurPortable = new SubCategory("Ordinateur Portable");
 const ordinateurBureau = new SubCategory("Ordinateur Bureau");
@@ -1146,7 +1245,10 @@ Iaccessoirs.addSubCategory(new SubCategory("Souris"));
 Iaccessoirs.addSubCategory(new SubCategory("Claviers"));
 
 //Telephonie & Tablette
-const telephonieTablette = new Category("Téléphonie & Tablette");
+const telephonieTablette = new Category(
+  "Téléphonie & Tablette",
+  "uil-mobile-android"
+);
 const Taccessoirs = new SubCategory("Accessoirs");
 
 telephonieTablette.addSubCategory(new SubCategory("Telephone Portable"));
@@ -1163,7 +1265,7 @@ Taccessoirs.addSubCategory(new SubCategory("Batterie"));
 Taccessoirs.addSubCategory(new SubCategory("Divers"));
 
 //Stockage
-const stockage = new Category("Stockage");
+const stockage = new Category("Stockage", "uil-hdd");
 
 stockage.addSubCategory(new SubCategory("Disque Dur internes"));
 stockage.addSubCategory(new SubCategory("Disque Dur externes"));
@@ -1171,7 +1273,7 @@ stockage.addSubCategory(new SubCategory("Clé USB"));
 stockage.addSubCategory(new SubCategory("Carte mémoire"));
 
 // TV-Son-Console
-const tvSonConsole = new Category("TV-Son-Console");
+const tvSonConsole = new Category("TV-Son-Console", "uil-icons");
 const consoles = new SubCategory("Consoles & Jeux");
 
 tvSonConsole.addSubCategory(new SubCategory("TV"));
@@ -1183,7 +1285,7 @@ consoles.addSubCategory(new SubCategory("Manettes de Jeux"));
 consoles.addSubCategory(new SubCategory("Disques de Jeux"));
 
 // Sécurite
-const securite = new Category("Sécurité");
+const securite = new Category("Sécurité", "uil-shield");
 
 securite.addSubCategory(new SubCategory("Systèmes & Logiciels Antivirus"));
 securite.addSubCategory(new SubCategory("Systèmes de Sécurité"));
@@ -1202,25 +1304,39 @@ function generateCategoryList(categories, parentElement, isDesktop = false) {
     const li = document.createElement("li");
     li.classList.add("category");
 
+    const div = document.createElement("div");
+    div.classList.add("div-category");
+
     const a = document.createElement("a");
-    a.textContent = category.name;
     a.href = `shop.html?category=${encodeURIComponent(category.name)}`;
+
+    if (isDesktop) {
+      a.textContent = category.name;
+    } else {
+      a.innerHTML = `<i class="uil ${category.iClass}"></i> ${category.name}`;
+    }
 
     const ul = document.createElement("ul");
     ul.classList.add("category-list");
     ul.style.display = isDesktop ? "block" : "none";
 
     const i = document.createElement("i");
-    i.classList.add("fas", "fa-angle-down", "arrowCategory");
+    i.classList.add("fas", "fa-plus", "arrowCategory");
 
     i.addEventListener("click", (event) => {
       event.preventDefault();
       toggleVisibility(ul);
-      i.classList.toggle("rot");
+      if (i.classList.contains("fa-plus")) {
+        i.classList.remove("fa-plus");
+        i.classList.add("fa-minus");
+      } else {
+        i.classList.remove("fa-minus");
+        i.classList.add("fa-plus");
+      }
     });
-
-    li.appendChild(a);
-    !isDesktop ? li.appendChild(i) : null;
+    div.appendChild(a);
+    !isDesktop ? div.appendChild(i) : null;
+    li.appendChild(div);
     li.appendChild(ul);
     parentElement.appendChild(li);
 
@@ -1275,20 +1391,20 @@ const categoryListDesktop = document.getElementById("category-list-desktop");
 generateCategoryList(filtres.generateFilters(), categoryList, false);
 generateCategoryList(filtres.generateFilters(), categoryListDesktop, true);
 
-// Gestion du préchargement de la page
 window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader_active");
   if (preloader) {
     preloader.style.transition = "opacity 0.6s ease";
     setTimeout(() => {
       preloader.style.display = "none";
-    }, 600); // Correspond à la durée de la transition CSS
+    }, 600);
   }
 });
 
 // Gestion des événements DOM
 document.addEventListener("DOMContentLoaded", () => {
   const showMenu = document.getElementById("showMenu");
+  const showCategories = document.getElementById("show-categories");
   const hiddenLink = document.getElementById("hiddenLink");
   const fond = document.getElementById("fond");
   const links = document.getElementById("links-container");
@@ -1325,15 +1441,138 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Gestion de la barre de recherche
-  if (hiddenSearch && showSearch && searchBar) {
-    hiddenSearch.addEventListener("click", () => {
-      searchBar.classList.remove("active");
+  if (showCategories && fond) {
+    showCategories.addEventListener("click", () => {
+      fondCategory.classList.add("show");
+      category.classList.add("show");
+      document.body.classList.add("modal-open");
     });
 
-    showSearch.addEventListener("click", () => {
-      searchBar.classList.add("active");
+    hiddenLink?.addEventListener("click", () => {
+      fondCategory.classList.remove("show");
+      category.classList.remove("show");
+      document.body.classList.remove("modal-open");
     });
+  }
+
+  // Gestion de la barre de recherche
+  // if (hiddenSearch && showSearch && searchBar) {
+  //   hiddenSearch.addEventListener("click", () => {
+  //     searchBar.classList.remove("active");
+  //   });
+
+  //   showSearch.addEventListener("click", () => {
+  //     searchBar.classList.add("active");
+  //   });
+  // }
+
+  // const searchInput = document.querySelector(".searchInput");
+  // const searchResults = document.getElementById("predictive-search-results");
+
+  // searchInput.addEventListener("input", () => {
+  //   if (searchInput.value.trim().length > 0) {
+  //     searchResults.style.display = "block";
+  //   } else {
+  //     searchResults.style.display = "none";
+  //   }
+  // });
+
+  // document.addEventListener("click", (event) => {
+  //   if (
+  //     !searchInput.contains(event.target) &&
+  //     !searchResults.contains(event.target)
+  //   ) {
+  //     searchResults.style.display = "none";
+  //   }
+  // });
+
+  const searchInput = document.querySelector(".searchInput");
+  const closeSearch = document.getElementById("closeSearch");
+  const resultsList = document.querySelector(".results-list");
+  const resultContent = document.querySelector(".result-content");
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && document.activeElement === searchInput) {
+      performSearch(searchInput.value);
+    }
+  });
+
+  showSearch.addEventListener("click", () => {
+    searchBar.classList.add("active");
+  });
+
+  closeSearch.addEventListener("click", () => {
+    searchBar.classList.remove("active");
+    resultContent.classList.remove("active");
+    searchInput.value = "";
+  });
+
+  searchInput.addEventListener("input", () => {
+    if (searchInput.value.trim().length > 0) {
+      resultContent.classList.add("active");
+      performSearch(searchInput.value);
+    } else {
+      resultContent.classList.remove("active");
+    }
+  });
+
+  function performSearch(query) {
+    if (query.length < 1) {
+      resultsList.innerHTML = "";
+      return;
+    }
+
+    let sortedProducts =
+      filteredProducts.length > 0 ? filteredProducts : products;
+
+    const filteredProducts2 = sortedProducts.filter((product) =>
+      product.name.toLowerCase().includes(query.toLowerCase())
+    );
+
+    resultsList.innerHTML = ""; // Réinitialise la liste
+
+    if (filteredProducts2.length === 0) {
+      resultsList.innerHTML = `<li class="result-item">No results found for "${query}"</li>`;
+    } else {
+      resultsList.innerHTML = filteredProducts2
+        .map(
+          (product) => `
+      <li class="result-item">
+        <a href="/product.html?id=${product.id}">
+          <img src="${product.images[0]}" alt="${
+            product.name
+          }" width="50" height="50">
+          <div>
+            <span class="vendor">${product.name.split(" ")[0]}</span>
+            <span class="product-name">${product.name}</span>
+            <div class="price-box">
+              ${
+                product.priceReduction > 0
+                  ? `<del class="old-price">${formatPrice(
+                      product.price + product.priceReduction
+                    )} FCFA</del>`
+                  : ""
+              }
+              <span class="new-price">${formatPrice(product.price)} FCFA</span>
+            </div>
+          </div>
+        </a>
+      </li>
+    `
+        )
+        .join("");
+    }
+
+    // Ajoute l'option de recherche globale
+    resultsList.innerHTML += `
+    <li class="result-item search-option">
+      <button onclick="window.location.href='/shop.html?query=${encodeURIComponent(
+        query
+      )}'">
+        Search for “${query}” <i class="uil uil-arrow-right"></i>
+      </button>
+    </li>
+  `;
   }
 });
 
@@ -1346,6 +1585,51 @@ function debounce(func, wait) {
     timeout = setTimeout(() => func.apply(context, args), wait);
   };
 }
+
+document.getElementById("chat").addEventListener("click", () => {
+  let chat = document.querySelector(".chat-container");
+
+  if (!chat) {
+    chat = document.createElement("div");
+    chat.classList.add("chat-container");
+    chat.innerHTML = `
+      <div class="chat-header">
+        <h2>Niger.net</h2>
+        <p>Customer Service</p>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="message bot">
+          <div class="message-content">
+            Bonjour, je suis Oms, votre assistant virtuel de Niger.net<br />
+            Je suis là pour vous aider. Cliquez sur l'une des options ci-dessous
+            ou saisissez votre question !
+          </div>
+          <div class="options-container">
+            <button class="option-btn">Service après-vente et assistance</button>
+            <button class="option-btn">Personnalisation et recommandations</button>
+            <button class="option-btn">Modes de paiement et finance</button>
+          </div>
+        </div>
+      </div>
+      <div class="input-container">
+        <input type="text" class="chat-input" id="user-input" placeholder="Tapez votre message..." />
+        <button class="send-btn" onclick="sendMessage()">Envoyer</button>
+      </div>
+    `;
+
+    document.body.appendChild(chat);
+
+    requestAnimationFrame(() => chat.classList.add("open"));
+
+    document.querySelector("#chat").addEventListener("click", () => {
+      chat.classList.remove("open");
+
+      setTimeout(() => {
+        chat.remove();
+      }, 500);
+    });
+  }
+});
 
 const handleScroll = debounce(() => {
   const header = document.getElementById("header");
@@ -1544,7 +1828,9 @@ function updateCompareModal() {
     modalHTML += `
       <td>
         <img src="${product.images[0]}" alt="${product.name}" />
-        <span class="current-price">${formatPrice(product.price)} FCFA</span>
+        <span class="current-price">${formatPrice(
+          product.getPrice()
+        )} FCFA</span>
         <a href="${`/product.html?id=${product.id}`}">View product</a>
       </td>`;
   });
@@ -1619,10 +1905,14 @@ function creationProduct(product) {
           />
         </a>
         ${
-          product.priceReduction
+          product.reductionType === "percentage"
             ? `<span class="item-prev-price">
-               <span>-${formatPrice(product.priceReduction)} FCFA</span>
-             </span>`
+                <span>-${product.priceReduction}%</span>
+              </span>`
+            : product.priceReduction > 0
+            ? `<span class="item-prev-price">
+                <span>-${formatPrice(product.priceReduction)} FCFA</span>
+              </span>`
             : ""
         }
       </div>
@@ -1631,7 +1921,15 @@ function creationProduct(product) {
           <a href="${`/product.html?id=${product.id}`}">${product.name}</a>
         </h2>
         <div class="item-price">
-          <span>${formatPrice(product.price)} FCFA</span>
+          <span>${product.getPrice()} FCFA</span>
+          ${
+            product.priceReduction
+              ? ` <span class="last-price">${formatPrice(
+                  product.price
+                )} FCFA</span>`
+              : ""
+          }
+         
         </div>
         <div class="item-description">${product.description}</div>
         <div class="product-action">
@@ -1712,10 +2010,14 @@ function creationWishItem(product) {
               alt="${product.name}"
             />
             ${
-              product.priceReduction
+              product.reductionType === "percentage"
                 ? `<span class="item-prev-price">
-                   <span>-${formatPrice(product.priceReduction)} FCFA</span>
-                 </span>`
+                    <span>-${product.priceReduction}%</span>
+                  </span>`
+                : product.priceReduction > 0
+                ? `<span class="item-prev-price">
+                    <span>-${formatPrice(product.priceReduction)} FCFA</span>
+                  </span>`
                 : ""
             }
           </div>
@@ -1744,8 +2046,17 @@ function creationWishItem(product) {
           >
         </h2>
         <div class="product-price">
-          <span>${formatPrice(product.price)} FCFA</span>
+          <span>${product.getPrice()} FCFA</span>
+          ${
+            product.priceReduction
+              ? ` <span class="last-price">${formatPrice(
+                  product.price
+                )} FCFA</span>`
+              : ""
+          }
+         
         </div>
+        
       </div>
     </div>
   `;

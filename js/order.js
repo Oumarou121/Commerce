@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusTranslations = {
     pending: "En attente d'expédition",
     shipping: "En cours d'expédition",
-    progress: "En cours de livraison",
+    progressed: "En cours de livraison",
+    "progressed-returned": "Retour en cours",
     delivered: "Livré",
     checking: "En vérification",
     cancelled: "Annulé",
@@ -51,7 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusColors = {
     pending: "txt-yellow",
     shipping: "txt-light-blue",
-    progress: "txt-blue",
+    progressed: "txt-blue",
+    "progressed-returned": "txt-light-orange",
     delivered: "txt-green",
     checking: "txt-purple",
     cancelled: "txt-red",
@@ -64,7 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   if (orders.getOrders().length > 0) {
-    const ordersList = orders.getOrders();
+    const ordersList = orders
+      .getOrders()
+      .sort((a, b) => b.updateAt - a.updateAt);
 
     ordersList.forEach((order) => {
       const items = order.getItems();
@@ -80,7 +84,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const bgColor = statusColors[status] || "bg-default";
         let targetContainer = null;
 
-        if (["pending", "progress", "delivered", "checking"].includes(status)) {
+        if (
+          [
+            "pending",
+            "progressed",
+            "progressed-returned",
+            "delivered",
+            "checking",
+          ].includes(status)
+        ) {
           targetContainer = cartContent1;
         } else if (["cancelled", "returned"].includes(status)) {
           targetContainer = cartContent2;
@@ -97,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (
           [
-            "progress",
+            "progressed",
             "checking",
             "report-returned",
             "report-delivered",

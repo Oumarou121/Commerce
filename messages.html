@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Track Product - Niger.net</title>
+    <title>Messagerie - Niger.net</title>
     <link rel="stylesheet" href="css/base.css?v=1.0" />
-    <link rel="stylesheet" href="css/track.css" />
+    <link rel="stylesheet" href="css/messages.css" />
 
     <!--============Icon Cdn==============-->
     <link
@@ -196,152 +196,24 @@
         </svg>
       </header>
 
-      <main id="main">
-        <section class="track-feature mb-40">
-          <div class="custom-container">
-            <a href="index.html">Home</a> <span>/</span>
-            <a href="order.html">Orders</a> <span>/</span>
-            <a id="title" href="index.html">Order #1</a> <span>/</span>
-            <span class="text-red">Track Product</span>
-          </div>
-        </section>
-        <section class="track-content">
-          <ul id="track-list"></ul>
-        </section>
+      <main id="messages-page" class="custom-container">
+        <div class="container">
+          <aside class="messages-list">
+            <h2>Messages</h2>
+            <ul id="messages"></ul>
+          </aside>
+          <section class="message-content">
+            <div id="message-display">
+              <h3 id="message-title">Sélectionnez un message</h3>
+              <p id="message-body">Cliquez sur un message pour l'afficher.</p>
+              <p id="message-time"></p>
+              <button id="delete-btn" class="delete-btn" style="display: none">
+                Supprimer
+              </button>
+            </div>
+          </section>
+        </div>
       </main>
-
-      <div id="shopify-section-footer" class="shopify-section">
-        <div id="section-footer">
-          <footer class="footer-area">
-            <div class="custom-container">
-              <div class="rowFooter">
-                <div>
-                  <div class="footer-widget mb-30">
-                    <h3 class="footer-title">Contact us</h3>
-
-                    <div class="footer-info">
-                      <ul class="footer-block__details-content information">
-                        <li>
-                          <span
-                            >Drou Demo Store <br />
-                            No. 1259 Freedom, New York <br />
-                            United States</span
-                          >
-                        </li>
-                        <li><span>+91-987654321</span></li>
-                        <li><span>demo@exampledemo.com</span></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <div class="footer-widget mb-30">
-                    <h3 class="footer-title">Information</h3>
-
-                    <div class="footer-info-list">
-                      <ul>
-                        <li>
-                          <a href="#">Product Support</a>
-                        </li>
-
-                        <li>
-                          <a href="/checkout">Checkout</a>
-                        </li>
-
-                        <li>
-                          <a href="#">License Policy</a>
-                        </li>
-
-                        <li>
-                          <a href="#">Affiliate</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <div class="footer-widget mb-30">
-                    <h3 class="footer-title">Customer Service</h3>
-
-                    <div class="footer-info-list">
-                      <ul>
-                        <li>
-                          <a href="/pages/about-us">Help Center</a>
-                        </li>
-
-                        <li>
-                          <a href="/pages/about-us">Redeem Voucher</a>
-                        </li>
-
-                        <li>
-                          <a href="contact.html">Contact Us</a>
-                        </li>
-
-                        <li>
-                          <a href="#">Policies &amp; Rules</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <div class="footer-widget mb-30">
-                    <h3 class="footer-title">Download Our App</h3>
-
-                    <div class="app-visa-wrap">
-                      <p>
-                        Download our App and get extra 15% Discount on your
-                        first Order..!
-                      </p>
-
-                      <div class="app-google-img">
-                        <a href=""
-                          ><img
-                            src=" https://cdn.shopify.com/s/files/1/0495/8021/2387/files/app-store.jpg?v=1603274799"
-                            alt=""
-                        /></a>
-                        <a href=""
-                          ><img
-                            src=" https://cdn.shopify.com/s/files/1/0495/8021/2387/files/google-play.jpg?v=1603274809  "
-                            alt=""
-                        /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </footer>
-        </div>
-      </div>
-
-      <div id="shopify-section-footer-copy-right" class="shopify-section">
-        <div id="section-footer-copy-right">
-          <footer class="footer-copyright-area">
-            <div class="custom-container">
-              <div class="row">
-                <div>
-                  <p>
-                    Copyright © Team90Degree | Built with Drou by Team90Degree.
-                  </p>
-                </div>
-                <div>
-                  <div class="payment-img">
-                    <a href=""
-                      ><img
-                        src=" https://cdn.shopify.com/s/files/1/0495/8021/2387/files/payment-method.png?v=1603274813  "
-                        alt=""
-                    /></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </footer>
-        </div>
-      </div>
     </div>
 
     <!-- ============== Scroll Up ==================== -->
@@ -351,6 +223,6 @@
     </div>
 
     <script src="js/base.js"></script>
-    <script src="js/track.js"></script>
+    <script src="js/messages.js"></script>
   </body>
 </html>

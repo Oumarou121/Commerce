@@ -1,9 +1,16 @@
 const grid = document.getElementById("grid");
 const list = document.getElementById("list");
 const productsContent = document.getElementById("listProducts");
-const productsPerPage = 1;
+const productsPerPage = 9;
 let currentPage = 1;
 const paginationContainer = document.querySelector(".shop_pagi ul");
+const urlParams = new URLSearchParams(window.location.search);
+const searchQuery = urlParams.get("query");
+
+if (searchQuery) {
+  document.querySelector(".searchInput").value = searchQuery;
+  applyFilter(null, null, false, true, searchQuery);
+}
 
 if (grid) {
   grid.addEventListener("click", () => {
@@ -33,7 +40,16 @@ function displayProducts(page, filteredProducts = null) {
     setTimeout(() => {
       productsContent.innerHTML = "";
 
-      let productsToDisplay = filteredProducts || products;
+      let productsToDisplay;
+      if (searchQuery !== "" && searchQuery !== null) {
+        console.log(filteredProducts);
+        productsToDisplay = filteredProducts || [];
+        document.querySelector(
+          ".shop-feature .custom-container .text-red"
+        ).innerHTML = `${`Search: ${productsToDisplay.length} result(s) found for "${searchQuery}"`}`;
+      } else {
+        productsToDisplay = filteredProducts || products;
+      }
 
       let start = (page - 1) * productsPerPage;
       let end = start + productsPerPage;
@@ -49,6 +65,7 @@ function displayProducts(page, filteredProducts = null) {
       }
 
       paginatedItems.forEach((product) => {
+        console.log(product);
         productsContent.innerHTML += creationProduct(product);
       });
 
@@ -161,32 +178,60 @@ function updatePagination(currentPage, productsToDisplay) {
   });
 }
 
-displayProducts(currentPage);
+if (searchQuery === "") {
+  displayProducts(currentPage);
+}
 
 // ==========================================================
 
-function applyFilter(filters, category, isInCategory = false) {
-  if (isInCategory) {
-    filteredProducts = products.filter((product) => {
-      return product.category.trim().startsWith(category.trim());
-    });
-  } else {
-    filteredProducts = products.filter((product) => {
-      return Object.entries(filters).every(([key, value]) => {
+function applyFilter(
+  filters,
+  category,
+  isInCategory = false,
+  isSearch = false,
+  query = null
+) {
+  const normalize = (str) =>
+    str
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+  const normalizedQuery = query ? normalize(query) : "";
+
+  filteredProducts = products.filter((product) => {
+    const normalizedName = normalize(product.name);
+    const matchesQuery =
+      normalizedQuery === "" || normalizedName.includes(normalizedQuery);
+    const matchesCategory =
+      !isInCategory || product.category.trim().startsWith(category.trim());
+
+    const matchesFilters =
+      !filters ||
+      Object.entries(filters).every(([key, value]) => {
         if (key === "Prix") {
-          let [min, max] = value.map((v) => parseInt(v.replace(" FCFA", "")));
+          const [min, max] = value.map((v) => parseInt(v.replace(" FCFA", "")));
           return product.price >= min && product.price <= max;
         }
 
         return (
           product.specs[key] &&
-          filters[key].some(
+          value.some(
             (v) => product.specs[key].toLowerCase() === v.toLowerCase()
           )
         );
       });
-    });
-  }
+
+    if (isSearch) {
+      return matchesQuery;
+    }
+
+    if (isInCategory) {
+      return matchesQuery && matchesCategory;
+    }
+
+    return matchesQuery && matchesFilters;
+  });
 
   displayProducts(currentPage, filteredProducts);
 }
@@ -208,8 +253,6 @@ if (sortBy) {
 }
 
 function sortProducts(sortBy) {
-  // let sortedProducts = [...products];
-
   let sortedProducts =
     filteredProducts.length > 0 ? filteredProducts : products;
 
@@ -227,11 +270,11 @@ function sortProducts(sortBy) {
       break;
 
     case "price-ascending":
-      sortedProducts.sort((a, b) => a.price - b.price);
+      sortedProducts.sort((a, b) => a.getPrice() - b.getPrice());
       break;
 
     case "price-descending":
-      sortedProducts.sort((a, b) => b.price - a.price);
+      sortedProducts.sort((a, b) => b.getPrice() - a.getPrice());
       break;
 
     case "created-descending":
@@ -243,10 +286,13 @@ function sortProducts(sortBy) {
       break;
 
     default:
-      // "manual" ou valeur non reconnue : ne pas trier
       break;
   }
 
   console.log("Produits triés :", sortedProducts);
-  displayProducts(currentPage, sortedProducts); // Affiche les produits triés
+  displayProducts(currentPage, sortedProducts);
 }
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   displayProducts(1, products);
+// });

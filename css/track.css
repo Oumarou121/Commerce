@@ -28,10 +28,6 @@
   text-align: center;
 }
 
-/* #track-list li:hover {
-  transform: scale(1.05);
-} */
-
 #track-list li .icon {
   font-size: 35px;
   margin: 0 60px;
@@ -48,8 +44,7 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  /* background-color: rgba(68, 68, 68, 0.781); */
-  background-color: #c0392b;
+  background-color: #e52e06;
   margin: 14px 0;
   display: grid;
   place-items: center;
@@ -166,7 +161,7 @@
   left: 120px;
   height: 210px;
   bottom: -300%;
-  background-color: #c0392b;
+  background-color: #e52e06;
 }
 
 @media (max-width: 767px) {

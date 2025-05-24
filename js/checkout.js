@@ -429,6 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
         new Order(
           user.id,
           user.id,
+          user.email,
           items,
           address,
           "cash",
@@ -469,6 +470,7 @@ document.addEventListener("DOMContentLoaded", () => {
         new Order(
           user.id,
           user.id,
+          user.email,
           items,
           address,
           `virtual-wallet-${reçuId}`,

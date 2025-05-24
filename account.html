@@ -42,7 +42,7 @@
     <div id="searchBar">
       <div class="exit">
         <svg
-          id="hiddenSearch"
+          id="closeSearch"
           xmlns="http://www.w3.org/2000/svg"
           height="32"
           viewBox="0 -960 960 960"
@@ -54,7 +54,20 @@
           />
         </svg>
       </div>
-      <input class="searchInput" type="text" placeholder="Search our store" />
+
+      <div class="search-results">
+        <input class="searchInput" type="text" placeholder="Search our store" />
+        <div class="result-content">
+          <h3>Products</h3>
+          <ul class="results-list">
+            <li class="result-item search-option">
+              <button>
+                <i class="uil uil-arrow-right"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="wrapper">
@@ -91,16 +104,13 @@
                 </div>
               </li>
               <li><a href="blogs.html">BLOG</a></li>
-              <!-- <li><a href="#">ABOUT US</a></li> -->
               <li><a href="contact.html">CONTACT US</a></li>
             </ul>
           </nav>
 
           <div class="header-action-right flex fs-body-large">
             <div id="showSearch" class="header-action-icon">
-              <!-- <a class="search-active" href="#"> -->
               <i class="uil uil-search"></i>
-              <!-- </a> -->
             </div>
             <div class="header-action-icon">
               <a href="/pages/wishlist"><i class="uil uil-heart"></i></a>
@@ -112,9 +122,7 @@
               </a>
             </div>
             <div id="showMenu" class="header-action-icon">
-              <!-- <a href="#"> -->
               <i class="uil uil-align-justify"></i>
-              <!-- </a> -->
             </div>
           </div>
         </div>
@@ -143,7 +151,6 @@
               </li>
 
               <li><a href="blogs.html">BLOG</a></li>
-              <!-- <li><a href="#">ABOUT US</a></li> -->
               <li><a href="contact.html">CONTACTS US</a></li>
 
               <li class="login">
@@ -201,14 +208,19 @@
           <div class="grid">
             <div class="grid-item two-thirds">
               <h2 class="section-title">Order History</h2>
-              <p>You haven't placed any orders yet.</p>
+              <div id="last-order-content" class="last-order"></div>
+              <p id="nbr-orders"></p>
             </div>
+
             <div class="grid-item one-third">
               <h2 class="section-title">Account Details</h2>
               <h3 id="name" class="account-name"></h3>
               <address id="address" class="account-address"></address>
               <p>
-                <a id="nbr-address" href="addresses.html">View Addresses (3)</a>
+                <a id="nbr-address" href="addresses.html"></a>
+              </p>
+              <p>
+                <a id="messages-link" href="messages.html"></a>
               </p>
             </div>
           </div>
@@ -350,7 +362,10 @@
     </div>
 
     <!-- ============== Scroll Up ==================== -->
-    <div id="scrollUp"><i class="uil uil-arrow-up"></i></div>
+    <div class="button-content">
+      <div id="chat" class="show"><i class="uil uil-comment-message"></i></div>
+      <div id="scrollUp"><i class="uil uil-arrow-up"></i></div>
+    </div>
 
     <script src="js/base.js"></script>
     <script src="js/account.js"></script>

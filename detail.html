@@ -42,7 +42,7 @@
     <div id="searchBar">
       <div class="exit">
         <svg
-          id="hiddenSearch"
+          id="closeSearch"
           xmlns="http://www.w3.org/2000/svg"
           height="32"
           viewBox="0 -960 960 960"
@@ -54,7 +54,20 @@
           />
         </svg>
       </div>
-      <input class="searchInput" type="text" placeholder="Search our store" />
+
+      <div class="search-results">
+        <input class="searchInput" type="text" placeholder="Search our store" />
+        <div class="result-content">
+          <h3>Products</h3>
+          <ul class="results-list">
+            <li class="result-item search-option">
+              <button>
+                <i class="uil uil-arrow-right"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="wrapper">
@@ -200,7 +213,7 @@
             </div>
           </div>
           <div class="order-summary">
-            <h2>Order Details</h2>
+            <!-- <h2>Order Details</h2> -->
             <table class="cart-summary-table">
               <tbody>
                 <tr class="cart-subtotal">
@@ -218,7 +231,7 @@
               </tbody>
             </table>
 
-            <h2>Payment Status</h2>
+            <!-- <h2>Payment Status</h2> -->
           </div>
           <div class="user-content">
             <h2>Customer</h2>
@@ -248,6 +261,58 @@
             <div id="user-address" class="user-shipping-adress"></div>
           </div>
         </section>
+        <!-- Modal de retour produit -->
+        <div id="return-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Demande de retour</h2>
+
+            <div class="product-info">
+              <img id="return-product-image" src="" alt="Produit" />
+              <div class="details">
+                <p>
+                  <strong><span id="return-product-name"></span></strong>
+                </p>
+                <p>
+                  <strong><span id="return-product-price"></span></strong>
+                </p>
+                <p>
+                  <strong class="qty"
+                    >x<span id="return-product-quantity"></span
+                  ></strong>
+                </p>
+              </div>
+            </div>
+
+            <label for="return-quantity"
+              >Nombre de produits à retourner :</label
+            >
+            <div class="quantity">
+              <span class="uil uil-minus" onclick="updateQuantity(-1)"></span>
+              <input type="text" name="quantity" value="1" readonly />
+              <span class="uil uil-plus" onclick="updateQuantity(1)"></span>
+            </div>
+            <label for="return-reason">Justification :</label>
+            <textarea
+              id="return-reason"
+              placeholder="Expliquez la raison du retour..."
+            ></textarea>
+
+            <label for="return-justification">Justificatif (image) :</label>
+            <input type="file" id="return-justification" accept="image/*" />
+            <img id="justification-preview" src="" alt="Aperçu justificatif" />
+
+            <button id="submit-return">Envoyer la demande</button>
+          </div>
+        </div>
+
+        <div id="confirmModal" class="modal">
+          <div class="modal-content-confirm">
+            <p>Êtes-vous sûr de vouloir annulée la commande de ce produit ?</p>
+            <button id="confirmCancelled">Oui</button>
+            <button id="cancelCancelled">Non</button>
+          </div>
+        </div>
       </main>
 
       <div id="shopify-section-footer" class="shopify-section">
@@ -385,7 +450,10 @@
     </div>
 
     <!-- ============== Scroll Up ==================== -->
-    <div id="scrollUp"><i class="uil uil-arrow-up"></i></div>
+    <div class="button-content">
+      <div id="chat" class="show"><i class="uil uil-comment-message"></i></div>
+      <div id="scrollUp"><i class="uil uil-arrow-up"></i></div>
+    </div>
 
     <script src="js/base.js"></script>
     <script src="js/detail.js"></script>
