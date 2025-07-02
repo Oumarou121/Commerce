@@ -1321,7 +1321,7 @@ function generateCategoryList(categories, parentElement, isDesktop = false) {
     ul.style.display = isDesktop ? "block" : "none";
 
     const i = document.createElement("i");
-    i.classList.add("fas", "fa-plus", "arrowCategory");
+    i.classList.add("fas", "fa-plus");
 
     i.addEventListener("click", (event) => {
       event.preventDefault();
@@ -1408,7 +1408,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const hiddenLink = document.getElementById("hiddenLink");
   const fond = document.getElementById("fond");
   const links = document.getElementById("links-container");
-  const hiddenSearch = document.getElementById("hiddenSearch");
+  // const hiddenSearch = document.getElementById("hiddenSearch");
   const showSearch = document.getElementById("showSearch");
   const searchBar = document.getElementById("searchBar");
   const fondCategory = document.getElementById("fondCategory");
@@ -1416,15 +1416,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const showCategory = document.getElementById("showCategory");
   const hiddenCategory = document.getElementById("hiddenCategory");
 
-  showCategory.addEventListener("click", () => {
-    fondCategory.classList.toggle("show");
-    category.classList.toggle("show");
-  });
+  if (showCategories) {
+    showCategories.addEventListener("click", () => {
+      fondCategory.classList.add("show");
+      category.classList.add("show");
+      document.body.classList.add("modal-open");
+    });
+  }
+
+  if (showCategory) {
+    showCategory.addEventListener("click", () => {
+      fondCategory.classList.add("show");
+      category.classList.add("show");
+      document.body.classList.add("modal-open");
+    });
+  }
 
   hiddenCategory.addEventListener("click", () => {
-    fondCategory.classList.toggle("show");
-    category.classList.toggle("show");
+    fondCategory.classList.remove("show");
+    category.classList.remove("show");
+    document.body.classList.remove("modal-open");
   });
+
+  // fondCategory.addEventListener("click", () => {
+  //   fondCategory.classList.remove("show");
+  //   category.classList.remove("show");
+  //   document.body.classList.remove("modal-open");
+  // });
 
   // Gestion du menu
   if (showMenu && fond && links) {
@@ -1439,20 +1457,12 @@ document.addEventListener("DOMContentLoaded", () => {
       links.classList.remove("show");
       document.body.classList.remove("modal-open");
     });
-  }
 
-  if (showCategories && fond) {
-    showCategories.addEventListener("click", () => {
-      fondCategory.classList.add("show");
-      category.classList.add("show");
-      document.body.classList.add("modal-open");
-    });
-
-    hiddenLink?.addEventListener("click", () => {
-      fondCategory.classList.remove("show");
-      category.classList.remove("show");
-      document.body.classList.remove("modal-open");
-    });
+    // fond.addEventListener("click", () => {
+    //   fond.classList.remove("show");
+    //   links.classList.remove("show");
+    //   document.body.classList.remove("modal-open");
+    // });
   }
 
   // Gestion de la barre de recherche
@@ -1497,24 +1507,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  showSearch.addEventListener("click", () => {
-    searchBar.classList.add("active");
-  });
+  if (showSearch) {
+    showSearch.addEventListener("click", () => {
+      searchBar.classList.add("active");
+    });
+  }
 
-  closeSearch.addEventListener("click", () => {
-    searchBar.classList.remove("active");
-    resultContent.classList.remove("active");
-    searchInput.value = "";
-  });
-
-  searchInput.addEventListener("input", () => {
-    if (searchInput.value.trim().length > 0) {
-      resultContent.classList.add("active");
-      performSearch(searchInput.value);
-    } else {
+  if (closeSearch) {
+    closeSearch.addEventListener("click", () => {
+      searchBar.classList.remove("active");
       resultContent.classList.remove("active");
-    }
-  });
+      searchInput.value = "";
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      if (searchInput.value.trim().length > 0) {
+        resultContent.classList.add("active");
+        performSearch(searchInput.value);
+      } else {
+        resultContent.classList.remove("active");
+      }
+    });
+  }
 
   function performSearch(query) {
     if (query.length < 1) {

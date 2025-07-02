@@ -22,12 +22,17 @@ document.addEventListener("DOMContentLoaded", function () {
     (product.qty / (product.sales + product.qty)) * 100 + "%";
   document.querySelector(".product-ref").innerText = product.reference;
   document.getElementById("productPrice").innerText = `${formatPrice(
+    product.getPrice()
+  )} FCFA`;
+  document.getElementById("lastProductPrice").innerText = `${formatPrice(
     product.price
   )} FCFA`;
   document.getElementById("previewPrice").innerText =
-    product.priceReduction === 0
-      ? null
-      : `-${formatPrice(product.priceReduction)} FCFA`;
+    product.reductionType === "percentage"
+      ? `-${product.priceReduction}%`
+      : product.priceReduction > 0
+      ? `-${formatPrice(product.priceReduction)} FCFA`
+      : "";
 
   function hiddenArrow() {
     scrollLeft.style.display = "none";
